@@ -1,0 +1,193 @@
+// src/components/Categories/Categories.scss
+.categories {
+    // Base section styles
+    padding: 5rem 0;
+    background-color: #ffffff;
+  
+    // Container with max-width and responsive padding
+    &__container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+  
+      @media (max-width: 768px) {
+        padding: 0 1rem;
+      }
+    }
+  
+    // Header section styling
+    &__header {
+      text-align: center;
+      margin-bottom: 4rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+  
+      @media (max-width: 768px) {
+        margin-bottom: 2.5rem;
+      }
+    }
+  
+    &__title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: #2d3436;
+      margin-bottom: 1rem;
+      font-weight: 600;
+      line-height: 1.2;
+  
+      @media (max-width: 768px) {
+        font-size: 2rem;
+      }
+    }
+  
+    &__subtitle {
+      font-size: 1.125rem;
+      color: #636e72;
+      line-height: 1.6;
+  
+      @media (max-width: 768px) {
+        font-size: 1rem;
+      }
+    }
+  
+    // Grid layout with responsive adjustments
+    &__grid {
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: repeat(2, 1fr);
+  
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+    }
+  
+    // Individual category item styling
+    &__item {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+  
+      // Featured item spans full width
+      &--featured {
+        grid-column: 1 / -1;
+  
+        .categories__item-image-wrapper {
+          aspect-ratio: 2/1;
+  
+          @media (max-width: 768px) {
+            aspect-ratio: 4/3;
+          }
+        }
+      }
+    }
+  
+    // Image container with aspect ratio
+    &__item-image-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 2/3;
+      border-radius: 8px;
+      overflow: hidden;
+      background-color: #f5f5f5;
+  
+      @media (max-width: 768px) {
+        aspect-ratio: 3/2;
+      }
+    }
+  
+    // Image styling
+    &__item-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+  
+    // Overlay styling with gradient
+    &__item-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 2rem 1.5rem;
+      background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 0.7) 100%
+      );
+      color: white;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+  
+      @media (max-width: 768px) {
+        opacity: 1;
+        padding: 1.5rem;
+      }
+    }
+  
+    &__item:hover &__item-overlay {
+      opacity: 1;
+    }
+  
+    // Description text in overlay
+    &__item-description {
+      font-size: 1.125rem;
+      margin-bottom: 0.5rem;
+      line-height: 1.4;
+  
+      @media (max-width: 768px) {
+        font-size: 1rem;
+      }
+    }
+  
+    // Item count in overlay
+    &__item-count {
+      font-size: 0.875rem;
+      opacity: 0.9;
+    }
+  
+    // Content section below image
+    &__item-content {
+      text-align: center;
+      padding: 0 1rem;
+    }
+  
+    // Category title
+    &__item-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: #2d3436;
+      margin-bottom: 1rem;
+      font-weight: 500;
+      line-height: 1.2;
+  
+      @media (max-width: 768px) {
+        font-size: 1.25rem;
+      }
+    }
+  
+    // View Collection button
+    &__item-button {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      font-size: 0.875rem;
+      color: #2d3436;
+      background: transparent;
+      border: 1px solid #2d3436;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+  
+      &:hover {
+        background-color: #2d3436;
+        color: white;
+      }
+  
+      @media (max-width: 768px) {
+        width: 100%;
+        max-width: 200px;
+      }
+    }
+  }

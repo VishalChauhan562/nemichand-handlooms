@@ -1,0 +1,200 @@
+// src/components/Hero/Hero.scss
+.hero {
+    position: relative;
+    background-color: #f8f9fa;
+    overflow: hidden;
+  
+    &__container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 1rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+  
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        padding: 0;
+        gap: 0;
+      }
+    }
+  
+    &__content {
+      z-index: 2;
+      padding: 2rem;
+  
+      &--mobile {
+        order: 2;  // Move content below image on mobile
+        text-align: center;
+        background-color: white;
+        margin-top: -2rem;
+        border-radius: 1.5rem 1.5rem 0 0;
+        padding: 2rem 1.5rem;
+        position: relative;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+      }
+    }
+  
+    &__text-content {
+      @media (max-width: 768px) {
+        max-width: 100%;
+        margin: 0 auto;
+      }
+    }
+  
+    &__title {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      color: #2d3436;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+  
+      @media (max-width: 768px) {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+      }
+    }
+  
+    &__description {
+      font-size: 1.25rem;
+      color: #636e72;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+  
+      @media (max-width: 768px) {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+      }
+    }
+  
+    &__cta {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+  
+      @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+      }
+    }
+  
+    &__button {
+      padding: 1rem 2rem;
+      font-size: 1.125rem;
+      background-color: #2d3436;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: auto;
+  
+      @media (max-width: 768px) {
+        width: 100%;
+        max-width: 280px;
+      }
+  
+      &:hover {
+        background-color: #636e72;
+      }
+    }
+  
+    &__special-offer {
+      display: flex;
+      flex-direction: column;
+  
+      @media (max-width: 768px) {
+        align-items: center;
+      }
+    }
+  
+    &__discount {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #e17055;
+  
+      @media (max-width: 768px) {
+        font-size: 1.25rem;
+      }
+    }
+  
+    &__offer-text {
+      font-size: 0.875rem;
+      color: #636e72;
+    }
+  
+    &__image-container {
+      position: relative;
+      height: 400px;
+      width: 100%;
+  
+      &--mobile {
+        height: 70vh;
+        max-height: 600px;
+        order: 1;  // Show image first on mobile
+      }
+    }
+  
+    &__image-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+  
+      &--active {
+        opacity: 1;
+      }
+    }
+  
+    &__image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+  
+      @media (max-width: 768px) {
+        border-radius: 0;  // Remove border radius on mobile
+      }
+    }
+  
+    &__indicators {
+      position: absolute;
+      bottom: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 0.5rem;
+      z-index: 2;
+  
+      @media (max-width: 768px) {
+        bottom: 2rem;  // Position indicators higher on mobile
+      }
+    }
+  
+    &__indicator {
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.5);
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+  
+      @media (max-width: 768px) {
+        width: 0.75rem;  // Larger touch targets on mobile
+        height: 0.75rem;
+      }
+  
+      &--active {
+        background-color: white;
+      }
+  
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.8);
+      }
+    }
+  }
