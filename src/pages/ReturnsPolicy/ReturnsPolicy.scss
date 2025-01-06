@@ -1,0 +1,299 @@
+//src/pages/ReturnsPolicy/ReturnsPolicy.scss
+.returns-policy {
+    padding: 3rem 1.5rem;
+    background-color: #f9fafb;
+  
+    &__container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+  
+    &__header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+  
+      h1 {
+        font-size: 2.5rem;
+        font-weight: 600;
+        color: #111827;
+        margin-bottom: 1rem;
+  
+        @media (max-width: 640px) {
+          font-size: 2rem;
+        }
+      }
+  
+      p {
+        font-size: 1.125rem;
+        color: #6b7280;
+        max-width: 600px;
+        margin: 0 auto;
+        line-height: 1.6;
+  
+        @media (max-width: 640px) {
+          font-size: 1rem;
+        }
+      }
+    }
+  
+    .policy-section {
+      margin-bottom: 4rem;
+  
+      &:last-child {
+        margin-bottom: 0;
+      }
+  
+      h2 {
+        font-size: 1.75rem;
+        font-weight: 600;
+        color: #111827;
+        margin-bottom: 1rem;
+      }
+  
+      .section-description {
+        color: #6b7280;
+        margin-bottom: 2rem;
+      }
+    }
+  
+    // Return Timeline Styling
+    .return-timeline {
+      position: relative;
+      padding: 2rem 0;
+    }
+  
+    .timeline-item {
+      display: flex;
+      gap: 1.5rem;
+      position: relative;
+      padding-bottom: 2rem;
+  
+      &:last-child {
+        padding-bottom: 0;
+      }
+  
+      .timeline-icon {
+        width: 48px;
+        height: 48px;
+        background: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        z-index: 1;
+        color: #059669;
+        flex-shrink: 0;
+      }
+  
+      .timeline-content {
+        flex: 1;
+        padding-top: 0.5rem;
+  
+        h3 {
+          font-size: 1.125rem;
+          font-weight: 600;
+          color: #111827;
+          margin-bottom: 0.5rem;
+        }
+  
+        p {
+          color: #6b7280;
+          font-size: 0.875rem;
+          line-height: 1.6;
+        }
+      }
+  
+      .timeline-connector {
+        position: absolute;
+        left: 24px;
+        top: 48px;
+        bottom: 0;
+        width: 2px;
+        background: #e5e7eb;
+      }
+    }
+  
+    // Eligibility Card Styling
+    .eligibility-card {
+      background: white;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  
+      .eligibility-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+        color: #059669;
+  
+        h3 {
+          font-size: 1.25rem;
+          font-weight: 600;
+          color: #111827;
+          margin: 0;
+        }
+      }
+  
+      p {
+        color: #4b5563;
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+      }
+  
+      .eligibility-criteria {
+        h4 {
+          font-size: 1rem;
+          font-weight: 500;
+          color: #374151;
+          margin-bottom: 1rem;
+        }
+  
+        ul {
+          list-style-type: none;
+          padding: 0;
+          margin: 0;
+  
+          li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: #4b5563;
+            font-size: 0.875rem;
+  
+            &::before {
+              content: '';
+              position: absolute;
+              left: 0;
+              top: 0.5rem;
+              width: 0.5rem;
+              height: 0.5rem;
+              border-radius: 50%;
+              background: #059669;
+            }
+  
+            &:last-child {
+              margin-bottom: 0;
+            }
+          }
+        }
+      }
+    }
+  
+    // Refund Information Grid
+    .refund-info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+  
+    .info-card {
+      background: white;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  
+      svg {
+        color: #059669;
+        margin-bottom: 1rem;
+      }
+  
+      h3 {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: #111827;
+        margin-bottom: 0.75rem;
+      }
+  
+      p {
+        color: #4b5563;
+        font-size: 0.875rem;
+        line-height: 1.6;
+        margin: 0;
+      }
+    }
+  
+    // Notice Card Styling
+    .notice-card {
+      background: #fff7ed;
+      border: 1px solid #fdba74;
+      border-radius: 1rem;
+      padding: 1.5rem;
+  
+      p {
+        color: #9a3412;
+        margin-bottom: 1rem;
+        font-weight: 500;
+      }
+  
+      ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+  
+        li {
+          color: #7c2d12;
+          font-size: 0.875rem;
+          margin-bottom: 0.5rem;
+          padding-left: 1.5rem;
+          position: relative;
+  
+          &::before {
+            content: '•';
+            position: absolute;
+            left: 0.5rem;
+            color: #ea580c;
+          }
+  
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  
+    // Help Section Styling
+    .help-section {
+      .help-content {
+        text-align: center;
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 2rem;
+        background: white;
+        border-radius: 1rem;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  
+        svg {
+          color: #059669;
+          margin-bottom: 1rem;
+        }
+  
+        h2 {
+          margin-bottom: 0.75rem;
+        }
+  
+        p {
+          color: #6b7280;
+          margin-bottom: 1.5rem;
+        }
+  
+        .contact-methods {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+          font-size: 0.875rem;
+          color: #4b5563;
+  
+          a {
+            color: #059669;
+            text-decoration: none;
+  
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+  }

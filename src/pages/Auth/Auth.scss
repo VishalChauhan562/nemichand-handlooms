@@ -1,0 +1,171 @@
+// src/pages/Auth/Auth.scss
+.auth {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background-color: #f8f9fa;
+  
+    &__container {
+      width: 100%;
+      max-width: 400px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+  
+    &__content {
+      padding: 2rem;
+    }
+  
+    &__title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: #2d3436;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+  
+    &__subtitle {
+      color: #636e72;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+  
+    &__toggle-buttons {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+  
+    &__identifier-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      background: transparent;
+      color: #636e72;
+      cursor: pointer;
+      transition: all 0.3s ease;
+  
+      &--active {
+        background: #2d3436;
+        color: white;
+        border-color: #2d3436;
+      }
+    }
+  
+    &__form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+  
+    &__form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  
+    &__label {
+      font-size: 0.875rem;
+      color: #2d3436;
+      font-weight: 500;
+    }
+  
+    &__input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+  
+      svg {
+        position: absolute;
+        left: 1rem;
+        color: #636e72;
+      }
+    }
+  
+    &__input {
+      width: 100%;
+      padding: 0.875rem 1rem 0.875rem 2.75rem;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      transition: all 0.3s ease;
+  
+      &:focus {
+        outline: none;
+        border-color: #2d3436;
+      }
+    }
+  
+    &__password-toggle {
+      position: absolute;
+      right: 1rem;
+      background: none;
+      border: none;
+      color: #636e72;
+      cursor: pointer;
+      padding: 0;
+    }
+  
+    &__error {
+      font-size: 0.75rem;
+      color: #e74c3c;
+      margin-top: 0.25rem;
+    }
+  
+    &__forgot-password {
+      font-size: 0.875rem;
+      color: #2d3436;
+      text-decoration: none;
+      align-self: flex-end;
+      margin-top: -0.5rem;
+  
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  
+    &__submit-btn {
+      width: 100%;
+      padding: 1rem;
+      background: #2d3436;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+  
+      &:hover {
+        background: #636e72;
+      }
+    }
+  
+    &__switch-mode {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 0.875rem;
+      color: #636e72;
+    }
+  
+    &__switch-btn {
+      background: none;
+      border: none;
+      color: #2d3436;
+      font-weight: 500;
+      cursor: pointer;
+      padding: 0;
+      margin-left: 0.5rem;
+  
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }

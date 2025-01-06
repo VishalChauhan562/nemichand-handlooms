@@ -1,0 +1,231 @@
+//src/pages/ShippingPolicy/ShippingPolicy.scss
+.shipping-policy {
+    padding: 3rem 1.5rem;
+    background-color: #f9fafb;
+  
+    &__container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+  
+    &__header {
+      text-align: center;
+      margin-bottom: 3rem;
+  
+      h1 {
+        font-size: 2.5rem;
+        font-weight: 600;
+        color: #111827;
+        margin-bottom: 1rem;
+  
+        @media (max-width: 640px) {
+          font-size: 2rem;
+        }
+      }
+  
+      p {
+        font-size: 1.125rem;
+        color: #6b7280;
+        max-width: 600px;
+        margin: 0 auto;
+  
+        @media (max-width: 640px) {
+          font-size: 1rem;
+        }
+      }
+    }
+  
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #111827;
+      margin-bottom: 1.5rem;
+    }
+  
+    section {
+      margin-bottom: 4rem;
+  
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  
+    .methods-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+  
+    .method-card {
+      background: white;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      display: flex;
+      gap: 1rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  
+      .method-icon {
+        width: 48px;
+        height: 48px;
+        background: #f3f4f6;
+        border-radius: 0.75rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #111827;
+      }
+  
+      .method-content {
+        flex: 1;
+  
+        h3 {
+          font-size: 1.125rem;
+          font-weight: 600;
+          margin-bottom: 0.75rem;
+          color: #111827;
+        }
+  
+        p {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          font-size: 0.875rem;
+          color: #6b7280;
+          margin-bottom: 0.5rem;
+  
+          &:last-child {
+            margin-bottom: 0;
+          }
+  
+          svg {
+            flex-shrink: 0;
+          }
+        }
+  
+        .delivery-time {
+          color: #059669;
+        }
+  
+        .delivery-cost {
+          color: #dc2626;
+        }
+      }
+    }
+  
+    .info-card {
+      background: white;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  
+      &:last-child {
+        margin-bottom: 0;
+      }
+  
+      h3 {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: #111827;
+        margin-bottom: 0.75rem;
+      }
+  
+      p {
+        color: #4b5563;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+  
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  
+    .pincode-checker {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+  
+      @media (max-width: 640px) {
+        flex-direction: column;
+      }
+  
+      input {
+        flex: 1;
+        padding: 0.75rem 1rem;
+        border: 1px solid #e5e7eb;
+        border-radius: 0.5rem;
+        font-size: 0.875rem;
+  
+        &:focus {
+          outline: none;
+          border-color: #000;
+          box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+        }
+      }
+  
+      button {
+        padding: 0.75rem 1.5rem;
+        background: #000;
+        color: white;
+        border: none;
+        border-radius: 0.5rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.2s;
+  
+        &:hover {
+          background: #1a1a1a;
+        }
+  
+        @media (max-width: 640px) {
+          width: 100%;
+        }
+      }
+    }
+  
+    .notes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+  
+    .note-item {
+      background: white;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  
+      svg {
+        color: #059669;
+        flex-shrink: 0;
+      }
+  
+      p {
+        color: #4b5563;
+        font-size: 0.875rem;
+        line-height: 1.6;
+        margin: 0;
+      }
+    }
+  
+    .contact-info {
+      background: white;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  
+      p {
+        color: #4b5563;
+        margin-bottom: 0.5rem;
+        font-size: 0.875rem;
+  
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }

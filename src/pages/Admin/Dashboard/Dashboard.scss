@@ -1,0 +1,215 @@
+//src/pages/Admin/Dashboard/Dashboard.scss
+.admin-dashboard {
+    padding: 2rem;
+  
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+  
+      h1 {
+        font-size: 1.875rem;
+        font-weight: 600;
+      }
+    }
+  }
+  
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .stat-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  
+    &__icon {
+      padding: 0.75rem;
+      border-radius: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  
+      &.orders { background: #e1effe; color: #1a56db; }
+      &.revenue { background: #def7ec; color: #046c4e; }
+      &.customers { background: #fae8ff; color: #9061f9; }
+      &.products { background: #ffe4e6; color: #e02424; }
+    }
+  
+    &__content {
+      h3 {
+        font-size: 0.875rem;
+        color: #6b7280;
+        margin: 0;
+      }
+  
+      .stat-value {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin: 0.25rem 0;
+      }
+  
+      .stat-label {
+        font-size: 0.75rem;
+        color: #6b7280;
+      }
+    }
+  }
+  
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  .dashboard-card {
+    background: white;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+  
+      h2 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin: 0;
+      }
+    }
+  
+    .chart-container {
+      min-height: 300px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #9ca3af;
+  
+      .placeholder-text {
+        margin-top: 1rem;
+        font-size: 0.875rem;
+      }
+    }
+  }
+  
+  .status-pills {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+  
+  .status-pill {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+  
+    &.delivered {
+      background: #def7ec;
+      color: #046c4e;
+    }
+  
+    &.processing {
+      background: #e1effe;
+      color: #1a56db;
+    }
+  
+    &.cancelled {
+      background: #fee2e2;
+      color: #dc2626;
+    }
+  }
+  
+  .view-all-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.375rem;
+    background: white;
+    color: #374151;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  
+    &:hover {
+      background: #f9fafb;
+    }
+  }
+  
+  .recent-orders {
+    table {
+      width: 100%;
+      border-collapse: collapse;
+  
+      th {
+        text-align: left;
+        padding: 1rem;
+        font-size: 1rem;
+        font-weight: 400;
+        color: #666;
+        border-bottom: 1px solid #e5e7eb;
+      }
+  
+      td {
+        padding: 1rem;
+        font-size: 1rem;
+        border-bottom: 1px solid #e5e7eb;
+      }
+    }
+  
+    .status-badge {
+      padding: 0.5rem 1rem;
+      border-radius: 2rem;
+      font-size: 0.875rem;
+      font-weight: normal;
+  
+      &.delivered {
+        background: #def7ec;
+        color: #046c4e;
+      }
+  
+      &.processing {
+        background: #e1effe;
+        color: #1a56db;
+      }
+    }
+  }
+  
+  .status-badge {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+  
+    &.delivered {
+      background: #def7ec;
+      color: #046c4e;
+    }
+  
+    &.processing {
+      background: #e1effe;
+      color: #1a56db;
+    }
+  
+    &.cancelled {
+      background: #fee2e2;
+      color: #dc2626;
+    }
+  }

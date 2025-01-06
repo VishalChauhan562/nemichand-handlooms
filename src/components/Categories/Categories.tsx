@@ -1,6 +1,9 @@
 // src/components/Categories/Categories.tsx
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './Categories.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../store/store';
+import { fetchCategories } from '../../store/slices/categorySlice';
 
 interface Category {
   id: string;
@@ -13,41 +16,54 @@ interface Category {
 }
 
 const Categories: React.FC = () => {
-  const categories: Category[] = [
-    {
-      id: 'bedsheets',
-      name: 'Bedsheets',
-      desktopImage: 'https://dummyimage.com/1200x600/000/fff',
-      mobileImage: 'https://dummyimage.com/800x600/000/fff',
-      itemCount: 24,
-      description: 'Experience the luxury of handwoven bedsheets crafted with tradition',
-      featured: true
-    },
-    {
-      id: 'doormats',
-      name: 'Doormats',
-      desktopImage: 'https://dummyimage.com/400x600/000/fff',
-      mobileImage: 'https://dummyimage.com/400x600/000/fff',
-      itemCount: 18,
-      description: 'Traditional handcrafted doormats for your entryway'
-    },
-    {
-      id: 'floormats',
-      name: 'Floormats',
-      desktopImage: 'https://dummyimage.com/400x600/000/fff',
-      mobileImage: 'https://dummyimage.com/400x600/000/fff',
-      itemCount: 15,
-      description: 'Premium quality floormats designed for comfort and style'
-    },
-    {
-      id: 'tablecovers',
-      name: 'Table Covers',
-      desktopImage: 'https://dummyimage.com/400x600/000/fff',
-      mobileImage: 'https://dummyimage.com/400x600/000/fff',
-      itemCount: 20,
-      description: 'Elegant table covers for special occasions'
-    }
-  ];
+
+  const dispatch: AppDispatch = useDispatch(); // Use typed dispatch
+  const {categories, error, loading} = useSelector((state: RootState) => state.category);
+
+  useEffect(() => {
+    dispatch(fetchCategories()); // Dispatch the thunk to fetch categories
+  }, [dispatch]);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
+  
+  // const categories: Category[] = [
+  //   {
+  //     id: 'bedsheets',
+  //     name: 'Bedsheets',
+  //     desktopImage: 'https://dummyimage.com/1200x600/000/fff',
+  //     mobileImage: 'https://dummyimage.com/800x600/000/fff',
+  //     itemCount: 24,
+  //     description: 'Experience the luxury of handwoven bedsheets crafted with tradition',
+  //     featured: true
+  //   },
+  //   {
+  //     id: 'doormats',
+  //     name: 'Doormats',
+  //     desktopImage: 'https://dummyimage.com/400x600/000/fff',
+  //     mobileImage: 'https://dummyimage.com/400x600/000/fff',
+  //     itemCount: 18,
+  //     description: 'Traditional handcrafted doormats for your entryway'
+  //   },
+  //   {
+  //     id: 'floormats',
+  //     name: 'Floormats',
+  //     desktopImage: 'https://dummyimage.com/400x600/000/fff',
+  //     mobileImage: 'https://dummyimage.com/400x600/000/fff',
+  //     itemCount: 15,
+  //     description: 'Premium quality floormats designed for comfort and style'
+  //   },
+  //   {
+  //     id: 'tablecovers',
+  //     name: 'Table Covers',
+  //     desktopImage: 'https://dummyimage.com/400x600/000/fff',
+  //     mobileImage: 'https://dummyimage.com/400x600/000/fff',
+  //     itemCount: 20,
+  //     description: 'Elegant table covers for special occasions'
+  //   }
+  // ];
+
+  // console.log("categories===>",categories);
 
   return (
     <section className="categories">
@@ -93,9 +109,6 @@ const Categories: React.FC = () => {
                       {category.description}
                     </p>
                   )}
-                  <span className="categories__item-count">
-                    {category.itemCount} items
-                  </span>
                 </div>
               </div>
 

@@ -1,0 +1,222 @@
+// src/components/Notifications/Notifications.scss
+.notifications {
+    position: relative;
+    
+    // Bell icon button styling
+    &__bell {
+      position: relative;
+      padding: 0.5rem;
+      background: none;
+      border: none;
+      color: #374151;
+      cursor: pointer;
+      transition: color 0.2s;
+  
+      &:hover {
+        color: #111827;
+      }
+    }
+  
+    // Notification count badge
+    &__count {
+      position: absolute;
+      top: 0;
+      right: 0;
+      min-width: 18px;
+      height: 18px;
+      padding: 0 5px;
+      background: #ef4444;
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 500;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  
+    // Dropdown panel styling
+    &__dropdown {
+      position: absolute;
+      top: calc(100% + 0.5rem);
+      right: 0;
+      width: 380px;
+      background: white;
+      border-radius: 0.75rem;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      z-index: 50;
+      overflow: hidden;
+  
+      @media (max-width: 480px) {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        border-radius: 0;
+      }
+    }
+  
+    // Header section with actions
+    &__header {
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid #e5e7eb;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f9fafb;
+  
+      h2 {
+        margin: 0;
+        font-size: 1.125rem;
+        font-weight: 600;
+      }
+    }
+  
+    &__actions {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+  
+      button {
+        background: none;
+        border: none;
+        font-size: 0.875rem;
+        color: #6b7280;
+        cursor: pointer;
+        padding: 0.25rem;
+        transition: color 0.2s;
+  
+        &:hover {
+          color: #111827;
+        }
+      }
+  
+      .close-btn {
+        padding: 0.25rem;
+        color: #9ca3af;
+  
+        &:hover {
+          color: #4b5563;
+        }
+      }
+    }
+  
+    // Notifications list
+    &__list {
+      max-height: 480px;
+      overflow-y: auto;
+  
+      @media (max-width: 480px) {
+        max-height: calc(100vh - 60px);
+      }
+    }
+  
+    // Empty state styling
+    &__empty {
+      padding: 3rem 1.5rem;
+      text-align: center;
+      color: #9ca3af;
+  
+      svg {
+        margin-bottom: 1rem;
+        opacity: 0.5;
+      }
+  
+      p {
+        margin: 0;
+        font-size: 0.875rem;
+      }
+    }
+  }
+  
+  // Individual notification item
+  .notification-item {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    position: relative;
+  
+    &:hover {
+      background: #f9fafb;
+    }
+  
+    &.unread {
+      background: #f3f4f6;
+  
+      &:hover {
+        background: #e5e7eb;
+      }
+    }
+  
+    // Notification type icon
+    .notification-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+  
+      &.order {
+        background: #dbeafe;
+        color: #1e40af;
+      }
+  
+      &.promotion {
+        background: #fef3c7;
+        color: #92400e;
+      }
+  
+      &.alert {
+        background: #fee2e2;
+        color: #dc2626;
+      }
+  
+      &.message {
+        background: #dcfce7;
+        color: #166534;
+      }
+    }
+  
+    // Notification content
+    .notification-content {
+      flex: 1;
+      min-width: 0;
+  
+      h3 {
+        margin: 0 0 0.25rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: #111827;
+      }
+  
+      p {
+        margin: 0 0 0.5rem;
+        font-size: 0.875rem;
+        color: #4b5563;
+        line-height: 1.4;
+      }
+  
+      .notification-time {
+        font-size: 0.75rem;
+        color: #6b7280;
+      }
+    }
+  
+    // Unread indicator dot
+    .unread-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #3b82f6;
+      position: absolute;
+      top: 50%;
+      right: 1.5rem;
+      transform: translateY(-50%);
+    }
+  }

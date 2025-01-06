@@ -1,6 +1,8 @@
 // src/components/Hero/Hero.tsx
 import { useState, useEffect } from 'react';
 import './Hero.scss';
+import React from 'react';
+
 
 interface HeroImage {
   id: number;
@@ -15,16 +17,16 @@ const Hero: React.FC = () => {
   const heroImages: HeroImage[] = [
     {
       id: 1,
-      desktop: "https://dummyimage.com/1200x600/000/fff",  // In production: high-res desktop image
-      mobile: "https://dummyimage.com/600x800/000/fff",    // In production: optimized mobile image
+      desktop: "https://img.freepik.com/premium-photo/vibrant-artwork-showcasing-collection-fabrics-textiles-materials-representing-different_280659-5571.jpg?w=900",  // In production: high-res desktop image
+      mobile: "https://img.freepik.com/premium-photo/vibrant-artwork-showcasing-collection-fabrics-textiles-materials-representing-different_280659-5571.jpg?w=900",    // In production: optimized mobile image
       alt: "Handloom bedsheet collection",
       title: "Authentic Handloom Fabrics",
       description: "Elevate your home with traditional craftsmanship"
     },
     {
       id: 2,
-      desktop: "https://dummyimage.com/1200x600/000/fff",  // In production: high-res desktop image
-      mobile: "https://dummyimage.com/600x800/000/fff",    // In production: optimized mobile image
+      desktop: "https://img.freepik.com/premium-photo/rug-wooden-floor-front-door_1368936-8792.jpg?w=740",  // In production: high-res desktop image
+      mobile: "https://img.freepik.com/premium-photo/rug-wooden-floor-front-door_1368936-8792.jpg?w=740",    // In production: optimized mobile image
       alt: "Premium doormat collection",
       title: "Artisanal Doormats",
       description: "Where tradition meets modern design"
