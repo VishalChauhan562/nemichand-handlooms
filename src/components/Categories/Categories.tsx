@@ -1,9 +1,8 @@
 // src/components/Categories/Categories.tsx
-import { useEffect, useState } from 'react';
-import './Categories.scss';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../../store/store';
-import { fetchCategories } from '../../store/slices/categorySlice';
+import { useEffect, useState } from "react";
+import "./Categories.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../store/store";
 
 interface Category {
   id: string;
@@ -16,17 +15,14 @@ interface Category {
 }
 
 const Categories: React.FC = () => {
-
   const dispatch: AppDispatch = useDispatch(); // Use typed dispatch
-  const {categories, error, loading} = useSelector((state: RootState) => state.category);
-
-  useEffect(() => {
-    dispatch(fetchCategories()); // Dispatch the thunk to fetch categories
-  }, [dispatch]);
+  const { categories, error, loading } = useSelector(
+    (state: RootState) => state.category
+  );
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
-  
+
   // const categories: Category[] = [
   //   {
   //     id: 'bedsheets',
@@ -80,19 +76,19 @@ const Categories: React.FC = () => {
             <article
               key={category.id}
               className={`categories__item ${
-                category.featured ? 'categories__item--featured' : ''
+                category.featured ? "categories__item--featured" : ""
               }`}
             >
               <div className="categories__item-image-wrapper">
                 <picture>
                   {/* Mobile image will be used for screens up to 768px */}
-                  <source 
-                    media="(max-width: 768px)" 
+                  <source
+                    media="(max-width: 768px)"
                     srcSet={category.mobileImage}
                   />
                   {/* Desktop image will be used for larger screens */}
-                  <source 
-                    media="(min-width: 769px)" 
+                  <source
+                    media="(min-width: 769px)"
                     srcSet={category.desktopImage}
                   />
                   <img
@@ -113,10 +109,8 @@ const Categories: React.FC = () => {
               </div>
 
               <div className="categories__item-content">
-                <h3 className="categories__item-title">
-                  {category.name}
-                </h3>
-                <button 
+                <h3 className="categories__item-title">{category.name}</h3>
+                <button
                   className="categories__item-button"
                   aria-label={`View ${category.name} Collection`}
                 >

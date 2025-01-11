@@ -1,0 +1,56 @@
+.pagination_conatiner{
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+
+    .pagination {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+      
+        &__button {
+          min-width: 32px;
+          height: 32px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 14px;
+          transition: all 0.2s ease;
+          cursor: pointer;
+          border: none;
+          background: none;
+          color: #666;
+      
+          &:hover:not(:disabled) {
+            color: #0066cc;
+          }
+      
+          &:disabled {
+            color: #ccc;
+            cursor: not-allowed;
+          }
+      
+          &--active {
+            color: #0066cc;
+            font-weight: 600;
+          }
+      
+          &--dots {
+            cursor: default;
+            &:hover {
+              color: #666;
+            }
+          }
+        }
+      
+        &__nav-button {
+          @extend .pagination__button;
+          padding: 0;
+          
+          svg {
+            width: 16px;
+            height: 16px;
+          }
+        }
+      }
+}

@@ -1,23 +1,4 @@
-// src/store/types.ts
-export interface RootState {
-  category: CategoryState;
-  auth: AuthState;
-}
-
-export interface CategoryItem {
-  id: number;
-  name: string;
-  desktopImage: string;
-  mobileImage: string;
-  description: string;
-  featured: boolean;
-}
-
-export interface CategoryState {
-  categories: CategoryItem[];
-  loading: boolean;
-  error: string | null;
-}
+// src/store/types.t
 
 export interface AuthState {
   user: User | null;
@@ -40,7 +21,6 @@ export interface LoginResponse {
   message?: string;
 }
 
-
 export interface User {
   id: number;
   email: string;
@@ -51,8 +31,6 @@ export interface User {
   created_at: Date;
   updated_at: Date;
 }
-
-
 
 export interface LoginCredentials {
   identifier: string;
@@ -65,5 +43,74 @@ export interface RegisterUser {
   phone_number: string;
   first_name: string;
   last_name: string;
+}
+
+export interface CategoryItem {
+  id: number;
+  name: string;
+  desktopImage: string;
+  mobileImage: string;
+  description: string;
+  featured: boolean;
+}
+
+export interface CategoryState {
+  categories: CategoryItem[];
+  loading: boolean;
+  error: string | null;
+}
+
+export interface CategoryInProduct {
+  id: number;
+  name: string;
+}
+
+export interface ProductItem {
+  id: number;
+  name: string;
+  category: CategoryInProduct;
+  price: string;
+  stock: number;
+  image_url: string;
+  description : string;
+  is_active: boolean;
+  is_featured: boolean
+}
+
+export interface ProductResponse {
+  products: ProductItem[];
+  total: number;
+  currentPage: number;
+  totalPages: number;
+}
+
+export interface ProductState extends ProductResponse {
+  loading: boolean;
+  error: string | null;
+}
+
+export interface ModofyProductState extends ProductState {
+  addProductLoading: boolean;
+  updateProductLoading: boolean;
+  deleteProductLoading: boolean;
+  addProductError: string | null;
+  updateProductError: string | null;
+  deleteProductError: string | null;
+}
+
+
+// cart
+
+export interface CartItem {
+  id: number;
+  quantity: number;
+  product: ProductItem;
+}
+
+export interface  Cart {
+  items: CartItem[],
+  total : 0,
+  loading: boolean,
+  error : string
 }
 

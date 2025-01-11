@@ -6,9 +6,12 @@ import "./Auth.scss";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
   clearError,
+  fetchProfile,
   loginUser,
   registerUser,
 } from "../../store/slices/authSlice";
+import NotificationService from "../../Services/NotificationService";
+import store from "../../store/store";
 
 interface FormData {
   identifier: string;
@@ -22,7 +25,7 @@ interface FormData {
 const Auth = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { isLoading, error, isAuthenticated } = useAppSelector(
+  const { isLoading, error, isAuthenticated, user } = useAppSelector(
     (state) => state.auth
   );
 
@@ -113,8 +116,18 @@ const Auth = () => {
           })
         )
           .unwrap()
-          .then(() => navigate("/"))
-          .catch(() => {});
+          .then(async () => {
+            navigate("/");
+            await dispatch(fetchProfile());
+            const currentUser = store.getState().auth.user.first_name;
+            NotificationService.success(
+                `Hi ${currentUser || 'there'} you are logged in successfully! Enjoy Shopping ❤️`
+            );
+        }).catch((e) => {
+          NotificationService.error(
+            `Error ${e}`
+          );
+        });
       } else {
         const { confirmPassword, identifier, ...registrationData } = formData;
         dispatch(
@@ -128,8 +141,16 @@ const Auth = () => {
           })
         )
           .unwrap()
-          .then(() => navigate("/"))
-          .catch(() => {});
+          .then(() => {navigate("/")
+            NotificationService.success(
+              `Hi you are registered successfully. Please login now. ✌️`
+            );
+          })
+          .catch((e) => {
+            NotificationService.error(
+              `Error ${e}`
+            );
+          });
       }
     }
   };

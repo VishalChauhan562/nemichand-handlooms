@@ -1,18 +1,19 @@
 import { useEffect, useRef, useState } from "react";
 import { ShoppingCart, User, Menu, Search, Bell, House } from "lucide-react";
 import "./Header.scss";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import React from "react";
 import Notifications from "../Notifications/Notifications";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { logoutUser } from "../../store/slices/authSlice";
+import NotificationService from "../../Services/NotificationService";
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const { isAuthenticated, user } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const userMenuRef = useRef<HTMLDivElement>(null);
 
@@ -33,10 +34,12 @@ const Header: React.FC = () => {
   return (
     <header className="header">
       <div className="header__container">
-        <div className="header__logo">
-          <NavLink to="/">
-            <img src="/assets/Logo.jpeg" alt="Nemichand Handloom" />
-          </NavLink>
+        <div className="header__logo-container">
+          <div className="header__logo">
+            <NavLink to="/">
+              <img src="/assets/Logo.png" alt="Nemichand Handloom" />
+            </NavLink>
+          </div>
         </div>
 
         <nav className={`header__nav ${isMenuOpen ? "header__nav--open" : ""}`}>
@@ -50,12 +53,12 @@ const Header: React.FC = () => {
                   }`
                 }
               >
-                <House size={25} /> 
+                <House size={25} />
               </NavLink>
             </li>
             <li className="header__nav-item">
               <NavLink
-                to="/new-arrivals"
+                to="/new"
                 className={({ isActive }) =>
                   `header__nav-link ${
                     isActive ? "header__nav-link--active" : ""
@@ -67,7 +70,7 @@ const Header: React.FC = () => {
             </li>
             <li className="header__nav-item">
               <NavLink
-                to="/shop-by-room"
+                to="/products"
                 className={({ isActive }) =>
                   `header__nav-link ${
                     isActive ? "header__nav-link--active" : ""
@@ -93,12 +96,6 @@ const Header: React.FC = () => {
         </nav>
 
         <div className="header__actions">
-          <button
-            className="header__action-btn"
-            onClick={() => setIsSearchOpen(!isSearchOpen)}
-          >
-            <Search size={25} />
-          </button>
           <div className="header__user-menu" ref={userMenuRef}>
             <button
               className="header__action-btn"
@@ -116,9 +113,29 @@ const Header: React.FC = () => {
                     <NavLink to="/profile" className="header__dropdown-item">
                       Profile
                     </NavLink>
+                    {user.is_admin && (
+                      <NavLink to="/admin" className="header__dropdown-item">
+                        Admin Panel
+                      </NavLink>
+                    )}
                     <button
                       className="header__dropdown-item"
-                      onClick={() => dispatch(logoutUser())}
+                      onClick={() =>
+                        dispatch(logoutUser())
+                          .unwrap()
+                          .then(() => {
+                            navigate("/");
+
+                            NotificationService.success(
+                              `Hi you are successfully logged out. Hope you will visit again 💕`
+                            );
+                          })
+                          .catch((e) => {
+                            NotificationService.error(
+                              `Error ${e}`
+                            );
+                          })
+                      }
                     >
                       Logout
                     </button>
@@ -144,17 +161,6 @@ const Header: React.FC = () => {
           </button>
         </div>
       </div>
-
-      {isSearchOpen && (
-        <div className="header__search">
-          <input
-            type="text"
-            placeholder="Search products..."
-            className="header__search-input"
-            autoFocus
-          />
-        </div>
-      )}
     </header>
   );
 };

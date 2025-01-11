@@ -1,8 +1,17 @@
 // src/pages/Admin/Dashboard/Dashboard.tsx
-import { useEffect, useState } from 'react';
-import { BarChart, LineChart, ChevronRight, Package, ShoppingCart, TrendingUp, Users } from 'lucide-react';
-import './Dashboard.scss';
-import React from 'react';
+import { useEffect, useState } from "react";
+import {
+  BarChart,
+  LineChart,
+  ChevronRight,
+  Package,
+  ShoppingCart,
+  TrendingUp,
+  Users,
+} from "lucide-react";
+import "./Dashboard.scss";
+import React from "react";
+import { NavLink } from "react-router-dom";
 
 interface DashboardStats {
   totalOrders: number;
@@ -22,28 +31,46 @@ const AdminDashboard = () => {
     totalOrders: 156,
     totalRevenue: 142500,
     totalCustomers: 89,
-    totalProducts: 45
+    totalProducts: 45,
   });
 
   const [orderStatus, setOrderStatus] = useState<OrderStatus>({
     delivered: 120,
     processing: 28,
-    cancelled: 8
+    cancelled: 8,
   });
 
   const [recentOrders] = useState([
-    { id: '#12345', customer: 'John Doe', amount: 2499, status: 'Delivered', date: '2024-01-02' },
-    { id: '#12346', customer: 'Jane Smith', amount: 3998, status: 'Processing', date: '2024-01-02' },
-    { id: '#12347', customer: 'Mike Wilson', amount: 1899, status: 'Processing', date: '2024-01-01' },
+    {
+      id: "#12345",
+      customer: "John Doe",
+      amount: 2499,
+      status: "Delivered",
+      date: "2024-01-02",
+    },
+    {
+      id: "#12346",
+      customer: "Jane Smith",
+      amount: 3998,
+      status: "Processing",
+      date: "2024-01-02",
+    },
+    {
+      id: "#12347",
+      customer: "Mike Wilson",
+      amount: 1899,
+      status: "Processing",
+      date: "2024-01-01",
+    },
   ]);
 
   return (
     <div className="admin-dashboard">
       <header className="admin-dashboard__header">
         <h1>Dashboard</h1>
-        <button className="view-all-btn">
-          View All Stats <ChevronRight size={20} />
-        </button>
+        <NavLink to='/admin/products' className="view-all-btn">
+          Manage Products <ChevronRight size={20} />
+        </NavLink>
       </header>
 
       <div className="stats-grid">
@@ -110,7 +137,9 @@ const AdminDashboard = () => {
           </div>
           <div className="chart-container">
             <BarChart size={24} />
-            <p className="placeholder-text">Orders chart will be displayed here</p>
+            <p className="placeholder-text">
+              Orders chart will be displayed here
+            </p>
           </div>
         </div>
 
@@ -120,13 +149,15 @@ const AdminDashboard = () => {
           </div>
           <div className="chart-container">
             <LineChart size={24} />
-            <p className="placeholder-text">Revenue chart will be displayed here</p>
+            <p className="placeholder-text">
+              Revenue chart will be displayed here
+            </p>
           </div>
         </div>
       </div>
 
       <div className="dashboard-card recent-orders">
-              <div className="card-header">
+        <div className="card-header">
           <h2>Recent Orders</h2>
           <button className="view-all-btn">View All</button>
         </div>
@@ -141,13 +172,15 @@ const AdminDashboard = () => {
             </tr>
           </thead>
           <tbody>
-            {recentOrders.map(order => (
+            {recentOrders.map((order) => (
               <tr key={order.id}>
                 <td>{order.id}</td>
                 <td>{order.customer}</td>
                 <td>₹{order.amount}</td>
                 <td>
-                  <span className={`status-badge ${order.status.toLowerCase()}`}>
+                  <span
+                    className={`status-badge ${order.status.toLowerCase()}`}
+                  >
                     {order.status}
                   </span>
                 </td>

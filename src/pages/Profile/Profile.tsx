@@ -4,6 +4,7 @@ import { User, MapPin, Phone, Mail, Camera, X } from "lucide-react";
 import "./Profile.scss";
 import OrderHistory from "../OrderHistory/OrderHistory";
 import React from "react";
+import { useAppSelector } from "../../store/hooks";
 
 interface UserProfile {
   name: string;
@@ -42,10 +43,11 @@ interface Order {
 }
 
 const Profile = () => {
+  const { user } = useAppSelector((state) => state.auth);
   const [profile, setProfile] = useState<UserProfile>({
-    name: "John Doe",
-    email: "john@example.com",
-    phone: "+91 98765 43210",
+    name: user.first_name + " " + user.last_name,
+    email: user.email,
+    phone: user.phone_number,
     addresses: [
       {
         id: "1",
