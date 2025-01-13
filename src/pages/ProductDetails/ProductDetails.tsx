@@ -3,8 +3,8 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { Heart, Minus, Plus, Star, Truck } from "lucide-react";
 import "./ProductDetails.scss";
-import Reviews from "@/components/Reviews/Reviews";
 import React from "react";
+import Reviews from "../../components/Reviews/Reviews";
 
 interface Product {
   id: string;

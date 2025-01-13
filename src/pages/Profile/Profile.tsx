@@ -5,6 +5,7 @@ import "./Profile.scss";
 import OrderHistory from "../OrderHistory/OrderHistory";
 import React from "react";
 import { useAppSelector } from "../../store/hooks";
+import { Order } from "../../store/slices/orderSlice";
 
 interface UserProfile {
   name: string;
@@ -34,14 +35,6 @@ interface OrderItem {
   image: string;
 }
 
-interface Order {
-  id: string;
-  date: string;
-  status: "delivered" | "processing" | "cancelled";
-  total: number;
-  items: OrderItem[];
-}
-
 const Profile = () => {
   const { user } = useAppSelector((state) => state.auth);
   const [profile, setProfile] = useState<UserProfile>({
@@ -61,40 +54,7 @@ const Profile = () => {
     ],
   });
 
-  const [orders] = useState<Order[]>([
-    {
-      id: "12345",
-      date: "2024-01-02",
-      status: "delivered",
-      total: 2499,
-      items: [
-        {
-          id: "1",
-          name: "Premium Cotton Bedsheet",
-          quantity: 1,
-          price: 2499,
-          size: "Queen",
-          color: "White",
-          image: "https://dummyimage.com/400x600/000/fff",
-        },
-      ],
-    },
-    {
-      id: "12346",
-      date: "2024-01-02",
-      status: "processing",
-      total: 3998,
-      items: [
-        {
-          id: "2",
-          name: "Traditional Doormat",
-          quantity: 2,
-          price: 1999,
-          image: "https://dummyimage.com/400x600/000/fff",
-        },
-      ],
-    },
-  ]);
+  const [orders] = useState<OrderItem[]>();
 
   const handleReorder = (orderId: string) => {
     // Add reorder functionality
@@ -401,12 +361,6 @@ const Profile = () => {
           </div>
         </div>
       )}
-
-      <OrderHistory
-        orders={orders}
-        onTrackOrder={handleTrackOrder}
-        onReorder={handleReorder}
-      />
     </div>
   );
 };

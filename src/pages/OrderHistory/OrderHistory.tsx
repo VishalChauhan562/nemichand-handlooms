@@ -1,7 +1,8 @@
 // src/components/OrderHistory/OrderHistory.tsx
-import React from 'react';
-import './OrderHistory.scss';
-import { ChevronRight, Box } from 'lucide-react';
+import React from "react";
+import "./OrderHistory.scss";
+import { ChevronRight, Box } from "lucide-react";
+import { Order } from "../../store/slices/orderSlice";
 
 interface OrderHistoryProps {
   orders: Order[];
@@ -9,10 +10,10 @@ interface OrderHistoryProps {
   onReorder: (orderId: string) => void;
 }
 
-const OrderHistory: React.FC<OrderHistoryProps> = ({ 
-  orders, 
-  onTrackOrder, 
-  onReorder 
+const OrderHistory: React.FC<OrderHistoryProps> = ({
+  orders,
+  onTrackOrder,
+  onReorder,
 }) => {
   return (
     <section className="order-history">
@@ -29,7 +30,9 @@ const OrderHistory: React.FC<OrderHistoryProps> = ({
             <div className="order-card__header">
               <div className="order-info">
                 <div className="order-meta">
-                  <span className="order-date">Ordered on {order.date}</span>
+                  <span className="order-date">
+                    Ordered on {order.order_date}
+                  </span>
                   <span className="order-id">Order #{order.id}</span>
                 </div>
                 <span className={`order-status ${order.status}`}>
@@ -38,22 +41,24 @@ const OrderHistory: React.FC<OrderHistoryProps> = ({
               </div>
               <div className="order-total">
                 <span>Total:</span>
-                <span className="amount">₹{order.total.toLocaleString()}</span>
+                <span className="amount">
+                  ₹{order.total_price.toLocaleString()}
+                </span>
               </div>
             </div>
 
             <div className="order-card__items">
-              {order.items.map((item) => (
+              {order.orderItems.map((item) => (
                 <div key={item.id} className="order-item">
                   <div className="item-image">
-                    <img src={item.image} alt={item.name} />
+                    <img src={item.product.image_url} alt={item.product.name} />
                   </div>
                   <div className="item-details">
-                    <h3>{item.name}</h3>
+                    <h3>{item.product.name}</h3>
                     <div className="item-meta">
                       <span>Qty: {item.quantity}</span>
-                      {item.size && <span>Size: {item.size}</span>}
-                      {item.color && <span>Color: {item.color}</span>}
+                      {/* {item.size && <span>Size: {item.size}</span>}
+                      {item.color && <span>Color: {item.color}</span>} */}
                     </div>
                     <span className="item-price">
                       ₹{item.price.toLocaleString()}
@@ -64,16 +69,16 @@ const OrderHistory: React.FC<OrderHistoryProps> = ({
             </div>
 
             <div className="order-card__actions">
-              <button 
+              <button
                 className="btn-track"
-                onClick={() => onTrackOrder(order.id)}
+                onClick={() => onTrackOrder(String(order.id))}
               >
                 Track Package
                 <ChevronRight size={16} />
               </button>
-              <button 
+              <button
                 className="btn-reorder"
-                onClick={() => onReorder(order.id)}
+                onClick={() => onReorder(String(order.id))}
               >
                 Buy Again
                 <Box size={16} />

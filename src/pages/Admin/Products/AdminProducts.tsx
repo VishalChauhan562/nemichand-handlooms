@@ -126,7 +126,7 @@ const AdminProducts: React.FC = () => {
     if (window.confirm("Are you sure you want to delete this product?")) {
       try {
         await dispatch(deleteProduct(id));
-        getFilteredProducts()
+        getFilteredProducts();
       } catch (error) {
         console.error("Error deleting product:", error);
       }
@@ -183,8 +183,8 @@ const AdminProducts: React.FC = () => {
       )}
       <Pagination
         currentPage={queryParams.page}
-        totalPages={Math.ceil(total / queryParams.limit)}
         onPageChange={(page) => handlePageChange(page)}
+        limit={queryParams.limit}
       />
     </div>
   );

@@ -5,7 +5,10 @@
     "lib": ["es6", "es2017", "esnext.asynciterable", "dom"], // Add "dom"
      // Add .tsx files
     "module": "esnext",              // Change from "commonjs" to "esnext"
-    "moduleResolution": "bundler",   // Change from "node" to "bundler"
+    "moduleResolution": "bundler",  
+    "target": "ES2017",
+    "outDir": "./dist", 
+ // Change from "node" to "bundler"
   },
   "include": ["./src/**/*.ts", "./src/**/*.tsx"],
   "exclude": ["node_modules"]
