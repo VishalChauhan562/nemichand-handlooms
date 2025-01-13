@@ -12,9 +12,11 @@ interface CartResponse {
   data: CartItem[];
   total: number;
   user_id: number;
+  cart_id: number;
 }
 
 interface CartState {
+  cart_id: number;
   items: CartItem[];
   total: number;
   user_id?: number;
@@ -24,6 +26,7 @@ interface CartState {
 
 // Initial State
 const initialState: CartState = {
+  cart_id: null,
   items: [],
   total: 0,
   loading: false,
@@ -56,12 +59,7 @@ export const addToCart = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
-      const response = await apiClient.post<CartItem>("/cart/items", item, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await apiClient.post<CartItem>("/cart/items", item);
       return response.data;
     } catch (error: any) {
       return rejectWithValue(
@@ -148,6 +146,7 @@ const cartSlice = createSlice({
         state.items = action.payload.data;
         state.total = action.payload.total;
         state.user_id = action.payload.user_id;
+        state.cart_id = action.payload.cart_id;
       })
       .addCase(fetchCart.rejected, (state, action) => {
         state.loading = false;
@@ -160,8 +159,6 @@ const cartSlice = createSlice({
       })
       .addCase(addToCart.fulfilled, (state, action) => {
         state.loading = false;
-        state.items.push(action.payload);
-        state.total = state.total + 1;
       })
       .addCase(addToCart.rejected, (state, action) => {
         state.loading = false;

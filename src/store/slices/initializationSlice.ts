@@ -3,6 +3,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fetchProfile } from "./authSlice";
 import { fetchCategories } from "./categorySlice";
 import { fetchProducts } from "./productSlice";
+import { fetchCart } from "./cartSlice";
 // Import other necessary actions
 
 export const initializeApp = createAsyncThunk(
@@ -14,6 +15,7 @@ export const initializeApp = createAsyncThunk(
         dispatch(fetchProfile()).unwrap(),
         dispatch(fetchCategories()).unwrap(),
         dispatch(fetchProducts("")).unwrap(),
+        dispatch(fetchCart()).unwrap(),
         // Add other initialization actions here
         // dispatch(fetchCategories()).unwrap(),
         // dispatch(fetchSettings()).unwrap(),

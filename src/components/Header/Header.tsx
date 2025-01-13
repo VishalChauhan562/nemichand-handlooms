@@ -9,6 +9,7 @@ import { logoutUser } from "../../store/slices/authSlice";
 import NotificationService from "../../Services/NotificationService";
 
 const Header: React.FC = () => {
+  const { total } = useAppSelector((state) => state.cart);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const { isAuthenticated, user } = useAppSelector((state) => state.auth);
@@ -113,7 +114,7 @@ const Header: React.FC = () => {
                     <NavLink to="/profile" className="header__dropdown-item">
                       Profile
                     </NavLink>
-                    {user.is_admin && (
+                    {user?.is_admin && (
                       <NavLink to="/admin" className="header__dropdown-item">
                         Admin Panel
                       </NavLink>
@@ -131,9 +132,7 @@ const Header: React.FC = () => {
                             );
                           })
                           .catch((e) => {
-                            NotificationService.error(
-                              `Error ${e}`
-                            );
+                            NotificationService.error(`Error ${e}`);
                           })
                       }
                     >
@@ -150,7 +149,7 @@ const Header: React.FC = () => {
           </div>
           <NavLink to="/cart" className="header__action-btn header__cart">
             <ShoppingCart size={25} />
-            <span className="header__cart-count">0</span>
+            <span className="header__cart-count">{total}</span>
           </NavLink>
           <Notifications />
           <button

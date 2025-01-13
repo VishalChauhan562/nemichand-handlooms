@@ -11,8 +11,9 @@ import { fetchProducts } from "../../store/slices/productSlice";
 import { addToCart } from "../../store/slices/cartSlice";
 import Loader from "../../components/Loader/Loader";
 import Pagination from "../../components/Pagination";
-import { ProductHeader, ProductSection } from "./ProductComponents";
-import { ProductFilters } from "./ProductComponents";
+import { ProductSection } from "./ProductSection";
+import { ProductHeader } from "./ProductHeader";
+import { ProductFilters } from "./ProductFilters";
 import "./ProductList.scss";
 
 // Keep the useDebounce hook as is...
@@ -185,7 +186,7 @@ const ProductList: React.FC = () => {
       onPriceChange: handlePriceChange,
       onRatingChange: handleRatingChange,
       onApplyFilters: applyFilterHandler,
-      showApplyButton
+      showApplyButton,
     }),
     [
       categories,
@@ -194,7 +195,7 @@ const ProductList: React.FC = () => {
       handlePriceChange,
       handleRatingChange,
       applyFilterHandler,
-      showApplyButton
+      showApplyButton,
     ]
   );
 

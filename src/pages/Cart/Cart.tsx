@@ -13,7 +13,7 @@ import {
   selectCartItemsCount,
   updateItemQuantityOptimistic,
 } from "../../store/slices/cartSlice";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 interface LoadingState {
   [key: number]: { updating?: boolean; removing?: boolean };
@@ -205,7 +205,9 @@ const Cart = () => {
             <span>₹{formatPrice(total)}</span>
           </div>
 
-          <button className="cart__checkout-btn">Proceed to Checkout</button>
+          <NavLink to="/checkout">
+            <button className="cart__checkout-btn">Proceed to Checkout</button>
+          </NavLink>
         </div>
       </div>
     </div>

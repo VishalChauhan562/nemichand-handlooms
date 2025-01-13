@@ -1,10 +1,14 @@
 // src/pages/Checkout/Checkout.tsx
-import { useState } from 'react';
-import { ChevronRight } from 'lucide-react';
-import './Checkout.scss';
-import React from 'react';
+import { useState, useEffect } from "react";
+import { ChevronRight } from "lucide-react";
+import "./Checkout.scss";
+import React from "react";
+import { useDispatch } from "react-redux";
+import { createOrder } from "../../store/slices/orderSlice";
+import apiClient from "../../apiClient";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 
-type CheckoutStep = 'shipping' | 'payment' | 'confirmation';
+type CheckoutStep = "shipping" | "payment" | "confirmation";
 
 interface ShippingDetails {
   name: string;
@@ -13,29 +17,92 @@ interface ShippingDetails {
   address: string;
   city: string;
   state: string;
-  pincode: string;
+  zip_code: string;
+  country: string;
 }
 
 const Checkout = () => {
-  const [currentStep, setCurrentStep] = useState<CheckoutStep>('shipping');
+  const { cart_id } = useAppSelector((state) => state.cart);
+  const [currentStep, setCurrentStep] = useState<CheckoutStep>("shipping");
   const [shippingDetails, setShippingDetails] = useState<ShippingDetails>({
-    name: '',
-    email: '',
-    phone: '',
-    address: '',
-    city: '',
-    state: '',
-    pincode: ''
+    name: "",
+    email: "",
+    phone: "",
+    address: "",
+    city: "",
+    state: "",
+    zip_code: "",
+    country: "",
   });
+  const [razorpayOrder, setRazorpayOrder] = useState<any>(null);
+  const dispatch = useAppDispatch();
 
-  const handleShippingSubmit = (e: React.FormEvent) => {
+  const handleShippingSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setCurrentStep('payment');
+
+    try {
+      const response = await dispatch(
+        createOrder({
+          shipping_address: shippingDetails,
+          payment_method: "razorpay",
+        })
+      ).unwrap();
+
+      // Store the Razorpay order details
+      setRazorpayOrder(response.razorpayOrder);
+      setCurrentStep("payment");
+    } catch (error) {
+      alert("Failed to create order: " + error);
+    }
   };
 
-  const handlePayment = () => {
-    // Integrate Razorpay here
-    setCurrentStep('confirmation');
+  const handlePayment = async () => {
+    if (!razorpayOrder) {
+      alert("Order not found. Please try again.");
+      return;
+    }
+
+    const options = {
+      key: process.env.REACT_APP_RAZORPAY_KEY, // Replace with your Razorpay Key ID
+      amount: razorpayOrder.amount, // Amount in paise
+      currency: razorpayOrder.currency,
+      name: "Your App Name",
+      description: "Test Transaction",
+      order_id: razorpayOrder.id, // Razorpay Order ID
+      handler: async function (response: any) {
+        const { razorpay_payment_id, razorpay_order_id, razorpay_signature } =
+          response;
+
+        try {
+          // Verify payment on the backend
+          const verifyResponse = await apiClient.post("/verify", {
+            razorpay_payment_id,
+            razorpay_order_id,
+            razorpay_signature,
+            cart_id,
+          });
+
+          if (verifyResponse.data.success) {
+            setCurrentStep("confirmation");
+          } else {
+            alert("Payment verification failed");
+          }
+        } catch (error) {
+          alert("Error verifying payment: " + error.message);
+        }
+      },
+      prefill: {
+        name: shippingDetails.name,
+        email: shippingDetails.email,
+        contact: shippingDetails.phone,
+      },
+      theme: {
+        color: "#3399cc",
+      },
+    };
+
+    const razorpay = new (window as any).Razorpay(options);
+    razorpay.open();
   };
 
   const renderShippingForm = () => (
@@ -46,7 +113,9 @@ const Checkout = () => {
           type="text"
           id="name"
           value={shippingDetails.name}
-          onChange={(e) => setShippingDetails({...shippingDetails, name: e.target.value})}
+          onChange={(e) =>
+            setShippingDetails({ ...shippingDetails, name: e.target.value })
+          }
           required
         />
       </div>
@@ -58,7 +127,9 @@ const Checkout = () => {
             type="email"
             id="email"
             value={shippingDetails.email}
-            onChange={(e) => setShippingDetails({...shippingDetails, email: e.target.value})}
+            onChange={(e) =>
+              setShippingDetails({ ...shippingDetails, email: e.target.value })
+            }
             required
           />
         </div>
@@ -69,7 +140,9 @@ const Checkout = () => {
             type="tel"
             id="phone"
             value={shippingDetails.phone}
-            onChange={(e) => setShippingDetails({...shippingDetails, phone: e.target.value})}
+            onChange={(e) =>
+              setShippingDetails({ ...shippingDetails, phone: e.target.value })
+            }
             required
           />
         </div>
@@ -80,7 +153,9 @@ const Checkout = () => {
         <textarea
           id="address"
           value={shippingDetails.address}
-          onChange={(e) => setShippingDetails({...shippingDetails, address: e.target.value})}
+          onChange={(e) =>
+            setShippingDetails({ ...shippingDetails, address: e.target.value })
+          }
           required
         />
       </div>
@@ -92,7 +167,9 @@ const Checkout = () => {
             type="text"
             id="city"
             value={shippingDetails.city}
-            onChange={(e) => setShippingDetails({...shippingDetails, city: e.target.value})}
+            onChange={(e) =>
+              setShippingDetails({ ...shippingDetails, city: e.target.value })
+            }
             required
           />
         </div>
@@ -103,18 +180,40 @@ const Checkout = () => {
             type="text"
             id="state"
             value={shippingDetails.state}
-            onChange={(e) => setShippingDetails({...shippingDetails, state: e.target.value})}
+            onChange={(e) =>
+              setShippingDetails({ ...shippingDetails, state: e.target.value })
+            }
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="country">Country</label>
+          <input
+            type="text"
+            id="country"
+            value={shippingDetails.country}
+            onChange={(e) =>
+              setShippingDetails({
+                ...shippingDetails,
+                country: e.target.value,
+              })
+            }
             required
           />
         </div>
 
         <div className="form-group">
-          <label htmlFor="pincode">Pincode</label>
+          <label htmlFor="zip_code">Pincode</label>
           <input
             type="text"
-            id="pincode"
-            value={shippingDetails.pincode}
-            onChange={(e) => setShippingDetails({...shippingDetails, pincode: e.target.value})}
+            id="zip_code"
+            value={shippingDetails.zip_code}
+            onChange={(e) =>
+              setShippingDetails({
+                ...shippingDetails,
+                zip_code: e.target.value,
+              })
+            }
             required
           />
         </div>
@@ -143,8 +242,8 @@ const Checkout = () => {
         <h2>Order Confirmed!</h2>
         <p>Your order has been placed successfully.</p>
         <p>Order ID: #123456</p>
-        <button 
-          onClick={() => window.location.href = '/'}
+        <button
+          onClick={() => (window.location.href = "/")}
           className="continue-shopping-btn"
         >
           Continue Shopping
@@ -157,15 +256,16 @@ const Checkout = () => {
     <div className="checkout">
       <div className="checkout__container">
         <div className="checkout__steps">
-          {['shipping', 'payment', 'confirmation'].map((step, index) => (
-            <div 
-              key={step} 
+          {["shipping", "payment", "confirmation"].map((step, index) => (
+            <div
+              key={step}
               className={`checkout__step ${
-                currentStep === step ? 'active' : ''
+                currentStep === step ? "active" : ""
               } ${
-                index < ['shipping', 'payment', 'confirmation'].indexOf(currentStep) + 1 
-                  ? 'completed' 
-                  : ''
+                index <
+                ["shipping", "payment", "confirmation"].indexOf(currentStep) + 1
+                  ? "completed"
+                  : ""
               }`}
             >
               <span className="step-number">{index + 1}</span>
@@ -175,9 +275,9 @@ const Checkout = () => {
         </div>
 
         <div className="checkout__content">
-          {currentStep === 'shipping' && renderShippingForm()}
-          {currentStep === 'payment' && renderPaymentSection()}
-          {currentStep === 'confirmation' && renderConfirmation()}
+          {currentStep === "shipping" && renderShippingForm()}
+          {currentStep === "payment" && renderPaymentSection()}
+          {currentStep === "confirmation" && renderConfirmation()}
 
           <div className="checkout__summary">
             <h3>Order Summary</h3>

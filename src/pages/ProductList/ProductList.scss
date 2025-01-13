@@ -253,8 +253,37 @@
           background: #2d3748;
         }
       }
+
+      .qunatity-btn-container{
+        display: flex;
+        gap: 6px;
+        margin-top: 5px;
+        align-self: center;
+        justify-content: space-around;
+        .qunatity-btn {
+          cursor: pointer;
+          border-radius: 0.375rem;
+          background: #1a202c;
+          color: white;
+          padding: 1% 4%;
+          &:active{
+            background: rgb(69, 215, 69);
+          }
+          &:hover{
+            background: #2d3748;
+          }
+
+        }
+        span{
+          font-size: large;
+          align-self: center;
+        }
+      
+      }
+
     }
-  }
+    }
+  
   
   @media (max-width: 768px) {
     .product-list {
